@@ -143,8 +143,8 @@ mercedes.brake();
 
 // class declaration
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
   // Methods will be added to .prototype property
@@ -155,9 +155,21 @@ class PersonCl {
   greet() {
     console.log(`Hey ${this.firstName}!`);
   }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+  set fullName(name) {
+    if (name.includes("")) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
 }
 
-const marta = new PersonCl(" Marta", 1980);
+const marta = new PersonCl(" Marta Davis", 1980);
 console.log(marta);
 marta.calcAge();
 
@@ -171,3 +183,29 @@ marta.greet();
 // 1. Classes are NOT hoisted
 // 2. Classes are first-class citizens
 // 3. Classes are executed in strict mode
+
+const john = {
+  name: "John",
+  lastName: "Smith",
+  yearOfBirth: 1990,
+  calculateAge: function () {
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.yearOfBirth;
+  },
+};
+
+console.log(john.calculateAge());
+
+//The same example, but with the getter
+
+const Jin = {
+  name: "Jin",
+  lastName: "Momsen",
+  yearOfBirth: 1980,
+  get age() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.yearOfBirth;
+  },
+};
+
+console.log(Jin.age);
